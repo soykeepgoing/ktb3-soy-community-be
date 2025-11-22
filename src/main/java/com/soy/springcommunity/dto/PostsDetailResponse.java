@@ -16,10 +16,10 @@ public class PostsDetailResponse {
 
     @Schema(description = "게시글 식별자", example = "101")
     private Long id;
-    @Schema(description = "게시글 제목", example = "title")
-    private String title;
+    @Schema(description = "토픽 코드", example = "topic code")
+    private String topicCode;
     @Schema(description = "게시글 내용", example = "content")
-    private String body;
+    private String content;
 
     @Schema(description = "게시글 이미지")
     private String imgUrl;
@@ -39,8 +39,8 @@ public class PostsDetailResponse {
     public static PostsDetailResponse of(Posts post, Boolean isUserLiked) {
         return new PostsDetailResponse(
                 post.getId(),
-                post.getTitle(),
-                post.getBody(),
+                post.getTopic().getLabel(),
+                post.getContent(),
                 post.getFilesPostImgUrl().getImgUrl(),
                 post.getCreatedAt(),
                 post.getUser().getNickname(),

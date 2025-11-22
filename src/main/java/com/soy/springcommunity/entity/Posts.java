@@ -39,6 +39,10 @@ public class Posts {
     @JoinColumn(name = "user_id")
     private Users user;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "topic_id")
+    private Topics topic;
+
     // @OneToMany(mappedBy = "post")
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Comments> comments;
@@ -49,10 +53,8 @@ public class Posts {
     @OneToOne(mappedBy = "post", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private FilesPostImgUrl filesPostImgUrl;
 
-    @Column(name = "title", length = 26, nullable = false)
-    private String title;
-    @Column(name = "body", nullable = false)
-    private String body;
+    @Column(name = "content", nullable = false)
+    private String content;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
@@ -60,9 +62,9 @@ public class Posts {
     private LocalDateTime updatedAt;
 
     @Builder
-    public Posts(String title, String body, Users user) {
-        this.title = title;
-        this.body = body;
+    public Posts(String content, Topics topic, Users user) {
+        this.content = content;
+        this.topic = topic;
         this.user = user;
         this.createdAt = LocalDateTime.now();
     }
@@ -71,15 +73,9 @@ public class Posts {
         this.id = postId;
     }
 
-    public void updatePostTitle(String title) {
-        if (title != null & title != "") {
-            this.title = title;
-        }
-    }
-
     public void updatePostContent(String content) {
         if (content != null & content != "") {
-            this.body = content;
+            this.content = content;
         }
     }
 

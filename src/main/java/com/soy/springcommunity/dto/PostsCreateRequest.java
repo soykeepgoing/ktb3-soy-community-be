@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public class PostsCreateRequest {
     @NotBlank
-    private String postTitle;
+    private String topicCode;
     @NotBlank
     private String postContent;
 }

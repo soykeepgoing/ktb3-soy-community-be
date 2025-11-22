@@ -5,13 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="43584907-90ba-4316-b51a-3f2b61e718d3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/soy/springcommunity/config/WebConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/soy/springcommunity/config/WebConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/static/default_post_img.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/static/default_post_img.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/FilesController.class.uniqueId0" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/entity/Topics.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/exception/TopicsException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/repository/topics/TopicsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14.3/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.3/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14.3/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.3/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.3/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileTestJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/config/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/dto/PostsCreateRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/dto/PostsCreateRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/dto/PostsDetailResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/dto/PostsDetailResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/dto/PostsEditRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/dto/PostsEditRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/dto/PostsItemResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/dto/PostsItemResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/entity/Posts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/entity/Posts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/service/PostsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/service/PostsService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +30,14 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
