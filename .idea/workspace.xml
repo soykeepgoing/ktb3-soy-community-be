@@ -5,25 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="43584907-90ba-4316-b51a-3f2b61e718d3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/8.14.3/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.3/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.14.3/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.3/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.14.3/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.3/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.3/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.3/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.3/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.3/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/soy/springcommunity/dto/PostsDetailResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/soy/springcommunity/dto/PostsDetailResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/soy/springcommunity/dto/PostsItemResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/soy/springcommunity/dto/PostsItemResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/FilesController.class.uniqueId4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/PostsItemResponse.class.uniqueId0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/PostsListResponse.class.uniqueId3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/dto/PostsDetailResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/dto/PostsDetailResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/dto/PostsEditRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/dto/PostsEditRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/dto/PostsItemResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/dto/PostsItemResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/entity/FilesPostImgUrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/entity/FilesPostImgUrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/entity/Posts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/entity/Posts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/FilesController.class.uniqueId3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/PostsController.class.uniqueId2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/PostsDetailResponse.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/PostsService.class.uniqueId1" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/service/PostsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/service/PostsService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

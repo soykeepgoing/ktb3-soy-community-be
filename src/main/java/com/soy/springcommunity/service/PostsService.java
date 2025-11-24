@@ -116,7 +116,7 @@ public class PostsService {
 
     public void validatePostEditRequest(PostsEditRequest postEditRequest) {
         if((postEditRequest.getPostContent()==null || postEditRequest.getPostContent().isEmpty()) &&
-                (postEditRequest.getPostImageUrl()==null || postEditRequest.getPostImageUrl().isEmpty())){
+                (postEditRequest.getPostImgUrl()==null || postEditRequest.getPostImgUrl().isEmpty())){
             throw new PostsException.NoEditPostsException("수정할 내용이 없습니다.");
         }
     }
@@ -135,7 +135,7 @@ public class PostsService {
         ensureUserIsPostWriter(posts.getUser().getId(), userId);
         validatePostEditRequest(postEditRequest);
         editPostContent(posts, postEditRequest.getPostContent());
-        editPostImgUrl(posts, postEditRequest.getPostImageUrl());
+        editPostImgUrl(posts, postEditRequest.getPostImgUrl());
         posts.updateModifiedAt();
         return SimpleResponse.forEditPost(userId, postId);
     }
