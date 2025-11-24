@@ -5,11 +5,11 @@ import lombok.Getter;
 @Getter
 public class PostsEditRequest {
     private String postContent;
-    private String postImageUrl;
+    private String postImgUrl;
 
     public PostsEditRequest() {}
-    public PostsEditRequest(String postContent, String postImageUrl) {
+    public PostsEditRequest(String postContent, String postImgUrl) {
         this.postContent = postContent;
-        this.postImageUrl = postImageUrl;
+        this.postImgUrl = postImgUrl;
     }
 }

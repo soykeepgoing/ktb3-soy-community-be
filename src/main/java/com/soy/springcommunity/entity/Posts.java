@@ -1,7 +1,5 @@
 package com.soy.springcommunity.entity;
 
-import com.soy.springcommunity.entity.Comments;
-import com.soy.springcommunity.entity.Users;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -84,7 +82,7 @@ public class Posts {
     }
 
     public void updatePostImage(String url){
-        this.filesPostImgUrl.setImgUrl(url);
+        this.filesPostImgUrl.updateImgUrl(url);
         updateModifiedAt();
     }
 }

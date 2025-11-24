@@ -1,5 +1,6 @@
 package com.soy.springcommunity.dto;
 
+import com.soy.springcommunity.entity.FilesUserProfileImgUrl;
 import com.soy.springcommunity.entity.PostStats;
 import com.soy.springcommunity.entity.Posts;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -19,7 +20,9 @@ public class PostsItemResponse {
     private String topicCode;
     private String topicLabel;
     private String content;
+    private String postImgUrl;
     private String userNickname;
+    private String userProfileImgUrl;
 
     public static PostsItemResponse from(Posts posts) {
         return new PostsItemResponse(
@@ -27,7 +30,9 @@ public class PostsItemResponse {
                 posts.getTopic().getCode(),
                 posts.getTopic().getLabel(),
                 posts.getContent(),
-                posts.getUser().getNickname()
+                posts.getFilesPostImgUrl().getImgUrl(),
+                posts.getUser().getNickname(),
+                posts.getUser().getFilesUserProfileImgUrl().getImgUrl()
         );
     }
 }

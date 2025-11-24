@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -127,15 +126,16 @@ public class PostsService {
         posts.updatePostContent(newContent);
     }
 
+    public void editPostImgUrl(Posts posts, String newImageUrl) {posts.getFilesPostImgUrl().updateImgUrl(newImageUrl);}
+
     @Transactional
     public SimpleResponse editPost(Long postId, Long userId, PostsEditRequest postEditRequest) {
         Posts posts = postsRepository.findById(postId)
                 .orElseThrow(() -> new PostsException.PostsNotFoundException("존재하지 않는 게시글입니다."));
         ensureUserIsPostWriter(posts.getUser().getId(), userId);
         validatePostEditRequest(postEditRequest);
-        // editPostTitle(posts, postEditRequest.getPostTitle());
         editPostContent(posts, postEditRequest.getPostContent());
-//        editPostImgUrl(posts, postEditRequest.getPostImageUrl());
+        editPostImgUrl(posts, postEditRequest.getPostImageUrl());
         posts.updateModifiedAt();
         return SimpleResponse.forEditPost(userId, postId);
     }

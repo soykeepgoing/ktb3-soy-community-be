@@ -45,8 +45,10 @@ public class FilesPostImgUrl {
         return new FilesPostImgUrl(post, imgUrl);
     }
 
-    public void setImgUrl(String imgUrl) {
+    public void updateImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
+
+
 }
 

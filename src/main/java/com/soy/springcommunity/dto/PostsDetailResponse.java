@@ -18,6 +18,8 @@ public class PostsDetailResponse {
     private Long id;
     @Schema(description = "토픽 코드", example = "topic code")
     private String topicCode;
+    @Schema(description = "토픽 라벨", example = "topic label")
+    private String topicLabel;
     @Schema(description = "게시글 내용", example = "content")
     private String content;
 
@@ -39,6 +41,7 @@ public class PostsDetailResponse {
     public static PostsDetailResponse of(Posts post, Boolean isUserLiked) {
         return new PostsDetailResponse(
                 post.getId(),
+                post.getTopic().getCode(),
                 post.getTopic().getLabel(),
                 post.getContent(),
                 post.getFilesPostImgUrl().getImgUrl(),
