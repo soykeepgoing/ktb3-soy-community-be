@@ -12,6 +12,6 @@ import java.util.Optional;
 @Repository
 public interface CommentsRepository extends JpaRepository<Comments, Long> {
     Optional<Comments> findById(Long id);
-    @EntityGraph(attributePaths = {"user", "user.filesUserProfileImgUrl"})
+    @EntityGraph(attributePaths = {"user", "user.filesUserProfileImgUrl", "commentStats"})
     List<Comments> findByPostId(Long postId);
 }

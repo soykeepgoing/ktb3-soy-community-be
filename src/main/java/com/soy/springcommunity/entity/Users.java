@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -29,6 +30,15 @@ public class Users {
     @Column(name = "is_deleted" )
     private Boolean isDeleted;
 
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Posts> posts;
 
@@ -41,8 +51,8 @@ public class Users {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<CommentLikes> commentLikes;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private UserDetail userDetail;
+//    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
+//    private UserDetail userDetail;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private FilesUserProfileImgUrl filesUserProfileImgUrl;
@@ -54,32 +64,37 @@ public class Users {
         this.passwordHash = PasswordUtil.getHashedPassword(password);
         this.nickname = nickname;
         this.isDeleted = false;
+        this.createdAt = LocalDateTime.now();
     }
 
-    public void setUserDetail(UserDetail userDetail) {
-        this.userDetail = userDetail;
-        if (userDetail.getUser() != this) {
-            userDetail.setUser(this);
-        }
+//    public void setUserDetail(UserDetail userDetail) {
+//        this.userDetail = userDetail;
+//        if (userDetail.getUser() != this) {
+//            userDetail.setUser(this);
+//        }
+//    }
+
+    protected void markUpdated(){
+        this.updatedAt = LocalDateTime.now();
     }
 
     public void updatePassword(String newPasswordHash) {
         this.passwordHash = newPasswordHash;
-        this.userDetail.setUpdatedAt();
+        this.markUpdated();
     }
 
     public void softDelete() {
         this.isDeleted = true;
-        this.userDetail.setDeletedAt();
+        this.markUpdated();
     }
 
     public void updateProfile(String newNickname){
         this.nickname = newNickname;
-        this.userDetail.setUpdatedAt();
+        this.markUpdated();
     }
 
     public void updateProfileImgUrl(String newImgUrl){
         this.filesUserProfileImgUrl.setImgUrl(newImgUrl);
-        this.userDetail.setUpdatedAt();
+        this.markUpdated();
     }
 }

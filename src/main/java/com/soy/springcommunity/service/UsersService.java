@@ -2,13 +2,10 @@ package com.soy.springcommunity.service;
 
 import com.soy.springcommunity.dto.*;
 import com.soy.springcommunity.entity.FilesUserProfileImgUrl;
-import com.soy.springcommunity.entity.UserDetail;
 import com.soy.springcommunity.entity.Users;
 import com.soy.springcommunity.exception.UsersException;
 import com.soy.springcommunity.repository.files.FilesUserProfileImgRepository;
-import com.soy.springcommunity.repository.users.UsersDetailRepository;
 import com.soy.springcommunity.repository.users.UsersRepository;
-import com.soy.springcommunity.utils.ConstantUtil;
 import com.soy.springcommunity.utils.PasswordUtil;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,32 +14,23 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import static com.soy.springcommunity.utils.ConstantUtil.URL_DEFAULT_USER_PROFILE;
 
 @Service
 public class UsersService {
     private UsersRepository usersRepository;
-    private UsersDetailRepository usersDetailRepository;
     private FilesUserProfileImgRepository filesUserProfileImgRepository;
 
     @Autowired
     public UsersService(UsersRepository usersRepository,
-                        UsersDetailRepository usersDetailRepository,
                         FilesUserProfileImgRepository filesUserProfileImgRepository
                         ) {
         this.usersRepository = usersRepository;
-        this.usersDetailRepository = usersDetailRepository;
         this.filesUserProfileImgRepository = filesUserProfileImgRepository;
     }
 
@@ -79,15 +67,13 @@ public class UsersService {
                 .nickname(nickname)
                 .build();
 
-        UserDetail userDetail = UserDetail.of(user);
         FilesUserProfileImgUrl filesUserProfileImgUrl =
                 FilesUserProfileImgUrl.of(user, URL_DEFAULT_USER_PROFILE);
 
         usersRepository.save(user);
-        usersDetailRepository.save(userDetail);
         filesUserProfileImgRepository.save(filesUserProfileImgUrl);
 
-        return UsersSignUpResponse.create(user.getId(), nickname, userDetail.getCreatedAt());
+        return UsersSignUpResponse.create(user.getId(), nickname, user.getCreatedAt());
     }
 
     @Transactional
