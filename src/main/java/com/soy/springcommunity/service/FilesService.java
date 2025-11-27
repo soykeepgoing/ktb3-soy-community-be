@@ -31,7 +31,6 @@ public class FilesService {
 
         String fileName = UUID.randomUUID() + ".png";
         String filePath = UPLOAD_USERS_DIR + fileName;
-        System.out.println(filePath);
         file.transferTo(new File(filePath));
         return "http://localhost:8080/uploads/" + fileName;
     }

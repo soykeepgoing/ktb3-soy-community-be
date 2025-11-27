@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import static com.soy.springcommunity.utils.ConstantUtil.URL_DEFAULT_POST_IMG;
+import static com.soy.springcommunity.utils.ValidationUtil.isBlank;
 
 @Service
 public class PostsService {
@@ -115,8 +116,7 @@ public class PostsService {
     }
 
     public void validatePostEditRequest(PostsEditRequest postEditRequest) {
-        if((postEditRequest.getPostContent()==null || postEditRequest.getPostContent().isEmpty()) &&
-                (postEditRequest.getPostImgUrl()==null || postEditRequest.getPostImgUrl().isEmpty())){
+        if(isBlank(postEditRequest.getPostContent()) && isBlank(postEditRequest.getPostImgUrl())){
             throw new PostsException.NoEditPostsException("수정할 내용이 없습니다.");
         }
     }

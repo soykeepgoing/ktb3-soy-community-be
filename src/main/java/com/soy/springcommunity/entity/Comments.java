@@ -56,7 +56,8 @@ public class Comments {
         this.createdAt = LocalDateTime.now();
     }
 
-    public void updateCommentBody(String newBody) {this.body = newBody;
+    public void updateCommentBody(String newBody) {
+        this.body = newBody;
     }
 }
 

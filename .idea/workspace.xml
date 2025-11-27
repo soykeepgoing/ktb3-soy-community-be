@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="43584907-90ba-4316-b51a-3f2b61e718d3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/utils/ValidationUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/entity/Comments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/entity/Comments.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/entity/Posts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/entity/Posts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/service/PostsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soy/springcommunity/service/PostsService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
