@@ -64,7 +64,6 @@ public class PostsLikeService implements LikesService {
         PostLikes checkPostLikes = postsLikesRepository.findByPostIdAndUserIdAndDeletedAtIsNull(contentId, userId)
                 .orElseThrow(()-> new LikesException.NotFoundException("좋아요 정보를 확인하세요"));
 
-        // checkPostLikes.deleteLikes();
         postsLikesRepository.delete(checkPostLikes);
 
         Long likeCounts = checkPostLikes.getPost().getPostStats().decreaseLikeCount();

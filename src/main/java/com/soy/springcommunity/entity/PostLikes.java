@@ -11,13 +11,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "post_likes")
-@NamedEntityGraph(
-        name = "PostLikes.withPostAndUser",
-        attributeNodes = {
-                @NamedAttributeNode("post"),
-                @NamedAttributeNode("user")
-        }
-)
 public class PostLikes extends BaseLikes{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")

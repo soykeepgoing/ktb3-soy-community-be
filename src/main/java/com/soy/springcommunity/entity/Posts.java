@@ -10,23 +10,12 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "posts")
-@NamedEntityGraphs({
-        @NamedEntityGraph(
-                name = "Posts.withUserAndStats",
-                attributeNodes = {
-                        @NamedAttributeNode("user"),
-                        @NamedAttributeNode("postStats")
-                }
-        ),
-        @NamedEntityGraph(
-                name = "Posts.withUserAndStatsAndComments",
-                attributeNodes = {
-                        @NamedAttributeNode("user"),
-                        @NamedAttributeNode("postStats"),
-                        @NamedAttributeNode("comments")
-                }
-        )
-    }
+@NamedEntityGraph(
+        name = "Posts.withUserAndStats",
+        attributeNodes = {
+                @NamedAttributeNode("user"),
+                @NamedAttributeNode("postStats")
+        }
 )
 public class Posts {
     @Id
@@ -41,7 +30,6 @@ public class Posts {
     @JoinColumn(name = "topic_id")
     private Topics topic;
 
-    // @OneToMany(mappedBy = "post")
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Comments> comments;
 

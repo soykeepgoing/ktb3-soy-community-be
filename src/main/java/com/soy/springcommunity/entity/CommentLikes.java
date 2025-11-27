@@ -9,13 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "comment_likes")
-@NamedEntityGraph(
-        name = "CommentLikes.withCommentAndUser",
-        attributeNodes = {
-                @NamedAttributeNode("comment"),
-                @NamedAttributeNode("user")
-        }
-)
 public class CommentLikes extends BaseLikes {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "comment_id")
