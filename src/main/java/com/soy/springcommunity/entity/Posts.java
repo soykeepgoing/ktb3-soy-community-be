@@ -1,8 +1,7 @@
 package com.soy.springcommunity.entity;
 
-import com.soy.springcommunity.utils.ValidationUtil;
 import jakarta.persistence.*;
-import static com.soy.springcommunity.utils.ValidationUtil.isBlank;
+import org.springframework.util.StringUtils;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -63,7 +62,7 @@ public class Posts {
     }
 
     public void updatePostContent(String content) {
-        if (isBlank(content)) {
+        if (StringUtils.hasText(content)) {
             this.content = content;
         }
     }

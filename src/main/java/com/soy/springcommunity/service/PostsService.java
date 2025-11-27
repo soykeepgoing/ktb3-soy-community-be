@@ -19,11 +19,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
 import static com.soy.springcommunity.utils.ConstantUtil.URL_DEFAULT_POST_IMG;
-import static com.soy.springcommunity.utils.ValidationUtil.isBlank;
 
 @Service
 public class PostsService {
@@ -116,7 +116,9 @@ public class PostsService {
     }
 
     public void validatePostEditRequest(PostsEditRequest postEditRequest) {
-        if(isBlank(postEditRequest.getPostContent()) && isBlank(postEditRequest.getPostImgUrl())){
+        if(
+                StringUtils.hasText(postEditRequest.getPostContent()) &&
+                StringUtils.hasText(postEditRequest.getPostImgUrl())){
             throw new PostsException.NoEditPostsException("수정할 내용이 없습니다.");
         }
     }
