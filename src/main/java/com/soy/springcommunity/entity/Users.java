@@ -58,7 +58,7 @@ public class Users {
     @Builder
     public Users(String email, String password, String nickname){
         this.email = email;
-        this.passwordHash = PasswordUtil.getHashedPassword(password);
+        this.passwordHash = password;
         this.nickname = nickname;
         this.isDeleted = false;
         this.createdAt = LocalDateTime.now();

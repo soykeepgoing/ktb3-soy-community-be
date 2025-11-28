@@ -1,11 +1,13 @@
 package com.soy.springcommunity.controller;
 
 import com.soy.springcommunity.dto.*;
+import com.soy.springcommunity.entity.Users;
 import com.soy.springcommunity.service.FilesService;
 import io.swagger.v3.oas.annotations.Operation;
 import com.soy.springcommunity.service.UsersService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,18 +41,31 @@ public class UsersController {
                 signUpResponse);
     }
 
-
-    @Operation(summary = "로그인")
     @PostMapping("/auth")
-    @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "로그인 성공")
-    })
-    public ResponseEntity<ApiCommonResponse<UsersSignInResponse>> signIn(@Valid @RequestBody UsersSignInRequest UsersSignInRequest) {
-        UsersSignInResponse signInResponse = usersService.signIn(UsersSignInRequest);
+    public ResponseEntity<ApiCommonResponse<UsersSignInResponse>> login(@RequestBody LoginRequest req, HttpSession session) {
+
+        UsersSignInResponse signInResponse = usersService.signIn(req);
+
+        // 🔥 로그인 성공 → 세션에 사용자 정보 저장
+        session.setAttribute("user", req.getEmail());
+
         return UsersApiResponse.created(HttpStatus.CREATED,
                 "로그인 성공",
                 signInResponse);
     }
+
+
+//    @Operation(summary = "로그인")
+//    @PostMapping("/auth")
+//    @ApiResponses({
+//            @ApiResponse(responseCode = "201", description = "로그인 성공")
+//    })
+//    public ResponseEntity<ApiCommonResponse<UsersSignInResponse>> signIn(@Valid @RequestBody UsersSignInRequest UsersSignInRequest) {
+//        UsersSignInResponse signInResponse = usersService.signIn(UsersSignInRequest);
+//        return UsersApiResponse.created(HttpStatus.CREATED,
+//                "로그인 성공",
+//                signInResponse);
+//    }
 
     @Operation(summary = "비밀번호 변경")
     @PatchMapping("/{id}/password")

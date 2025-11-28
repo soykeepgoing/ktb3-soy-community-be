@@ -11,6 +11,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -20,18 +21,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.soy.springcommunity.utils.ConstantUtil.URL_DEFAULT_USER_PROFILE;
+import static com.soy.springcommunity.utils.PasswordUtil.getHashedPassword;
 
 @Service
 public class UsersService {
     private UsersRepository usersRepository;
     private FilesUserProfileImgRepository filesUserProfileImgRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
     public UsersService(UsersRepository usersRepository,
-                        FilesUserProfileImgRepository filesUserProfileImgRepository
-                        ) {
+                        FilesUserProfileImgRepository filesUserProfileImgRepository,
+                        PasswordEncoder passwordEncoder
+    ) {
         this.usersRepository = usersRepository;
         this.filesUserProfileImgRepository = filesUserProfileImgRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     private boolean isEmailExist(String email) {
@@ -59,6 +64,8 @@ public class UsersService {
         if(isNicknameExist(nickname)){
             throw new ResponseStatusException(HttpStatus.CONFLICT, "이미 존재하는 닉네임입니다.");
         }
+
+        password = getHashedPassword(password);
 
         // 데이터 저장
         Users user = Users.builder()
@@ -104,10 +111,10 @@ public class UsersService {
     }
 
     @Transactional
-    public UsersSignInResponse signIn(UsersSignInRequest UsersSignInRequest) {
+    public UsersSignInResponse signIn(LoginRequest loginRequest) {
 
-        String email = UsersSignInRequest.getUserEmail();
-        String password = UsersSignInRequest.getUserPassword();
+        String email = loginRequest.getEmail();
+        String password = loginRequest.getPassword();
 
         Users users = usersRepository.findByEmailAndIsDeletedFalse(email)
                 .orElseThrow(() -> new UsersException.UsersNotFoundException("존재하지 않는 사용자입니다."));
@@ -118,9 +125,7 @@ public class UsersService {
         return new UsersSignInResponse(
                 users.getId(),
                 users.getNickname(),
-                users.getFilesUserProfileImgUrl().getImgUrl(),
-                authInfoMap.get("issuedAt"),
-                authInfoMap.get("expiresIn")
+                users.getFilesUserProfileImgUrl().getImgUrl()
         );
     }
 
@@ -138,7 +143,7 @@ public class UsersService {
             throw new UsersException.SamePasswordException("현재 비밀번호와 새 비밀번호가 동일합니다.");
         }
 
-        String newPasswordHash = PasswordUtil.getHashedPassword(newPassword);
+        String newPasswordHash = getHashedPassword(newPassword);
         users.updatePassword(newPasswordHash);
 
         return new UsersSimpleResponse(

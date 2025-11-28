@@ -14,18 +14,14 @@ public class UsersSignInResponse {
 
     @Schema(description = "사용자 프로필 이미지 url", example="example.com/example.png")
     private String userProfileImgUrl;
-    @Schema(description = "사용자 로그인 일시", example = "202510212147")
-    private String userIssuedAt;
-    @Schema(description = "사용자 로그인 만료 일시", example = "202510282147")
-    private String userExpiresIn;
+
 
     public UsersSignInResponse() {}
-    public UsersSignInResponse(Long userId, String userNickname, String userProfileImgUrl, String issuedAt, String expiresIn) {
+    public UsersSignInResponse(Long userId, String userNickname, String userProfileImgUrl) {
         this.userId = userId;
         this.userNickname = userNickname;
         this.userProfileImgUrl = userProfileImgUrl;
-        this.userIssuedAt = issuedAt;
-        this.userExpiresIn = expiresIn;
     }
+
 }
 
