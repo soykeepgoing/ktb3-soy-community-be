@@ -60,25 +60,6 @@ public class SecurityConfig{
         return http.build();
     }
 
-    private static CustomJsonAuthFilter getCustomJsonAuthFilter(AuthenticationManager authManager) {
-        CustomJsonAuthFilter jsonFilter = new CustomJsonAuthFilter(authManager);
-
-        jsonFilter.setAuthenticationSuccessHandler((request, response, authentication) -> {
-
-            SecurityContext context = SecurityContextHolder.createEmptyContext();
-            context.setAuthentication(authentication);
-            SecurityContextHolder.setContext(context);
-
-            request.getSession(true);
-            request.getSession().setMaxInactiveInterval(3600);
-
-            response.setStatus(HttpServletResponse.SC_OK);
-            response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write("{\"message\":\"login success\"}");
-        });
-        return jsonFilter;
-    }
-
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
