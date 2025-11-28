@@ -54,19 +54,6 @@ public class UsersController {
                 signInResponse);
     }
 
-
-//    @Operation(summary = "로그인")
-//    @PostMapping("/auth")
-//    @ApiResponses({
-//            @ApiResponse(responseCode = "201", description = "로그인 성공")
-//    })
-//    public ResponseEntity<ApiCommonResponse<UsersSignInResponse>> signIn(@Valid @RequestBody UsersSignInRequest UsersSignInRequest) {
-//        UsersSignInResponse signInResponse = usersService.signIn(UsersSignInRequest);
-//        return UsersApiResponse.created(HttpStatus.CREATED,
-//                "로그인 성공",
-//                signInResponse);
-//    }
-
     @Operation(summary = "비밀번호 변경")
     @PatchMapping("/{id}/password")
     @ApiResponses({

@@ -47,7 +47,8 @@ public class CustomAuthSuccessHandler implements AuthenticationSuccessHandler {
         UsersSignInResponse usersSignInResponse = new UsersSignInResponse(
                 user.getId(),
                 user.getNickname(),
-                user.getFilesUserProfileImgUrl().getImgUrl()
+                user.getFilesUserProfileImgUrl().getImgUrl(),
+                user.getRole().name()
         );
 
         response.setStatus(HttpServletResponse.SC_OK);

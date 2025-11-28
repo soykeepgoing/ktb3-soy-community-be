@@ -15,12 +15,15 @@ public class UsersSignInResponse {
     @Schema(description = "사용자 프로필 이미지 url", example="example.com/example.png")
     private String userProfileImgUrl;
 
+    @Schema(description = "사용자 권한")
+    private String role;
 
     public UsersSignInResponse() {}
-    public UsersSignInResponse(Long userId, String userNickname, String userProfileImgUrl) {
+    public UsersSignInResponse(Long userId, String userNickname, String userProfileImgUrl, String role) {
         this.userId = userId;
         this.userNickname = userNickname;
         this.userProfileImgUrl = userProfileImgUrl;
+        this.role = role;
     }
 
 }

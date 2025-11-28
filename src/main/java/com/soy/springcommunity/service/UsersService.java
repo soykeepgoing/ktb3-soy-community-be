@@ -125,7 +125,8 @@ public class UsersService {
         return new UsersSignInResponse(
                 users.getId(),
                 users.getNickname(),
-                users.getFilesUserProfileImgUrl().getImgUrl()
+                users.getFilesUserProfileImgUrl().getImgUrl(),
+                users.getRole().name()
         );
     }
 

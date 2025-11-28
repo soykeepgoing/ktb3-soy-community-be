@@ -1,5 +1,6 @@
 package com.soy.springcommunity.config;
 
+import com.soy.springcommunity.entity.Role;
 import com.soy.springcommunity.filter.CustomJsonAuthFilter;
 import com.soy.springcommunity.handler.CustomAuthSuccessHandler;
 import com.soy.springcommunity.service.CustomUserDetailsService;
@@ -55,6 +56,7 @@ public class SecurityConfig{
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/api/users/auth", "/api/users").permitAll()
+                        .requestMatchers("/api/admin/**").hasAuthority(Role.ADMIN.name())
                         .anyRequest().authenticated()
                 )
                 .addFilterAt(jsonFilter, UsernamePasswordAuthenticationFilter.class);
