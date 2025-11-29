@@ -1,10 +1,7 @@
 package com.soy.springcommunity.service;
 
 import com.soy.springcommunity.dto.*;
-import com.soy.springcommunity.entity.CommentStats;
-import com.soy.springcommunity.entity.Comments;
-import com.soy.springcommunity.entity.Posts;
-import com.soy.springcommunity.entity.Users;
+import com.soy.springcommunity.entity.*;
 import com.soy.springcommunity.exception.CommentsException;
 import com.soy.springcommunity.exception.PostsException;
 import com.soy.springcommunity.exception.UsersException;
@@ -56,12 +53,14 @@ public class CommentsService {
     }
 
     @Transactional
-    public CommentsCreateResponse createComments(CommentsCreateRequest createCommentRequest,
-                                                 Long postId,
-                                                 Long userId,
-                                                 Long parentCommentId
+    public CommentsCreateResponse createComments(
+            CustomUserDetails userDetails,
+            CommentsCreateRequest createCommentRequest,
+            Long postId,
+            Long parentCommentId
     ) {
-        Users user = usersRepository.findByIdAndIsDeletedFalse(userId)
+        Long userId = userDetails.getUser().getId();
+        Users user = usersRepository.findById(userId)
                 .orElseThrow(()-> new UsersException.UsersNotFoundException("존재하지않는 유저입니다."));
 
         Posts post = postsRepository.findById(postId)
@@ -100,10 +99,13 @@ public class CommentsService {
     }
 
     @Transactional
-    public SimpleResponse editComments(CommentsEditRequest editCommentRequest,
-                                       Long postId,
-                                       Long commentId,
-                                       Long userId){
+    public SimpleResponse editComments(
+            CustomUserDetails userDetails,
+            CommentsEditRequest editCommentRequest,
+            Long postId,
+            Long commentId){
+        Long userId = userDetails.getUser().getId();
+
         Comments comment = commentsRepository.findById(commentId)
                         .orElseThrow(() -> new CommentsException.CommentsNotFoundException("존재하지 않는 댓글입니다."));
 
@@ -114,7 +116,11 @@ public class CommentsService {
     }
 
     @Transactional
-    public SimpleResponse deleteComments(Long postId, Long commentId, Long userId){
+    public SimpleResponse deleteComments(
+            CustomUserDetails userDetails,
+            Long postId,
+            Long commentId){
+        Long userId = userDetails.getUser().getId();
         Comments comment = commentsRepository.findById(commentId)
                 .orElseThrow(() -> new CommentsException.CommentsNotFoundException("존재하지 않는 댓글입니다."));
 
