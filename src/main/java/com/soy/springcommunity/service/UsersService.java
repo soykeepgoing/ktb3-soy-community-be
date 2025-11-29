@@ -52,7 +52,7 @@ public class UsersService {
     }
 
     @Transactional
-    public UsersSignUpResponse signup(UsersSignUpRequest usersSignUpRequest) {
+    public UsersSignUpResponse signup(UsersSignUpRequest usersSignUpRequest, String userProfileImgUrl) {
         String email = usersSignUpRequest.getUserEmail();
         String password = usersSignUpRequest.getUserPassword();
         String nickname = usersSignUpRequest.getUserNickname();
@@ -79,7 +79,7 @@ public class UsersService {
                 .build();
 
         FilesUserProfileImgUrl filesUserProfileImgUrl =
-                FilesUserProfileImgUrl.of(user, URL_DEFAULT_USER_PROFILE);
+                FilesUserProfileImgUrl.of(user, userProfileImgUrl);
 
         usersRepository.save(user);
         filesUserProfileImgRepository.save(filesUserProfileImgUrl);
@@ -153,7 +153,6 @@ public class UsersService {
         Users user = usersRepository.findById(id).
                 orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         user.softDelete();
-
         return new UsersSimpleResponse(
                 user.getId(),
                 user.getNickname()

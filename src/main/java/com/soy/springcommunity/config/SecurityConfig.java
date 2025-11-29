@@ -56,7 +56,8 @@ public class SecurityConfig{
                         .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers("/api/auth/login", "/api/users", "/api/auth/logout").permitAll()
+                        .requestMatchers("/api/auth/login", "/api/auth/logout", "/api/users").permitAll()
+                        .requestMatchers("/error").permitAll()
                         .requestMatchers("/api/admin/**").hasAuthority(Role.ADMIN.name())
                         .anyRequest().authenticated()
                 )
@@ -70,6 +71,7 @@ public class SecurityConfig{
                             response.getWriter().write("{\"message\":\"logout success\"}");
                         })
                 )
+                .requestCache(requestCache -> requestCache.disable())
                 .addFilterAt(jsonFilter, UsernamePasswordAuthenticationFilter.class);
 
 

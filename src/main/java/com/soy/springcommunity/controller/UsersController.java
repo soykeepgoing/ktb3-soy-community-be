@@ -15,8 +15,10 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -26,24 +28,36 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 
+import static com.soy.springcommunity.utils.ConstantUtil.URL_DEFAULT_USER_PROFILE;
+
 @RestController
 @RequestMapping("/api/users")
 public class UsersController {
     private UsersService usersService;
+    private FilesService filesService;
 
     @Autowired
-    public UsersController(UsersService usersService) {
+    public UsersController(UsersService usersService,
+                           FilesService filesService) {
         this.usersService = usersService;
+        this.filesService = filesService;
     }
 
     @Operation(summary = "회원가입")
-    @PostMapping("")
-    @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "가입 성공")
-    })
-    public ResponseEntity<ApiCommonResponse<UsersSignUpResponse>> signUp(@Valid @RequestBody UsersSignUpRequest usersSignUpRequest) throws IOException {
-        UsersSignUpResponse signUpResponse = usersService.signup(usersSignUpRequest);
-        return UsersApiResponse.created(
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ApiResponse(responseCode = "200", description = "가입 성공")
+    public ResponseEntity<ApiCommonResponse<UsersSignUpResponse>> signUp(
+            @RequestPart("data") @Valid UsersSignUpRequest usersSignUpRequest,
+            @RequestPart(value = "profileImage", required = false) MultipartFile profileImage
+            ) throws IOException {
+        String userProfileImgUrl = URL_DEFAULT_USER_PROFILE;
+        if (!profileImage.isEmpty()) {
+            userProfileImgUrl = filesService.saveFile(profileImage);
+        }
+
+        UsersSignUpResponse signUpResponse = usersService.signup(usersSignUpRequest, userProfileImgUrl);
+
+        return UsersApiResponse.ok(
                 HttpStatus.OK,
                 "회원가입 성공",
                 signUpResponse);
