@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 public class CommentsItemResponse {
     private Long id;
     private String body;
+    private Long userId;
     private String userNickname;
     private String userProfileImgUrl;
     private LocalDateTime createdAt;
@@ -21,6 +22,7 @@ public class CommentsItemResponse {
         return new CommentsItemResponse(
                 comments.getId(),
                 comments.getBody(),
+                comments.getUser().getId(),
                 comments.getUser().getNickname(),
                 comments.getUser().getFilesUserProfileImgUrl().getImgUrl(),
                 comments.getCreatedAt()

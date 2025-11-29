@@ -29,6 +29,7 @@ public class PostsDetailResponse {
     @Schema(description = "게시글 생성일시", example = "202510101010")
     private LocalDateTime createdAt;
 
+    private Long userId;
     private String userNickname;
     private String userProfileImgUrl;
 
@@ -46,6 +47,7 @@ public class PostsDetailResponse {
                 post.getContent(),
                 post.getFilesPostImgUrl().getImgUrl(),
                 post.getCreatedAt(),
+                post.getUser().getId(),
                 post.getUser().getNickname(),
                 post.getUser().getFilesUserProfileImgUrl().getImgUrl(),
                 post.getPostStats().getViewCount(),
