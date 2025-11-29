@@ -82,13 +82,7 @@ public class SecurityConfig{
 
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:5501"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
-        configuration.setAllowedHeaders(Arrays.asList(
-                "Content-Type",
-                "X-XSRF-TOKEN",
-                "X-CSRF-TOKEN",
-                "Accept",
-                "Authorization"
-                ));
+        configuration.setAllowedHeaders(Arrays.asList("Content-Type", "Accept", "Authorization"));
         configuration.setExposedHeaders(List.of("Set-Cookie"));
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(3600L);

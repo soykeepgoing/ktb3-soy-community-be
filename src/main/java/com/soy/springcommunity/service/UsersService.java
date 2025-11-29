@@ -89,7 +89,9 @@ public class UsersService {
 
     @Transactional
     public void updateProfileImage(CustomUserDetails userDetails, String url){
-        Users user = userDetails.getUser();
+        Long id = userDetails.getUser().getId();
+        Users user = usersRepository.findById(id).
+                orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         user.updateProfileImgUrl(url);
     }
 
@@ -98,7 +100,9 @@ public class UsersService {
             CustomUserDetails userDetails,
             UsersEditPasswordRequest usersEditPasswordRequest) {
 
-        Users user = userDetails.getUser();
+        Long id = userDetails.getUser().getId();
+        Users user = usersRepository.findById(id).
+                orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         String oldPassword = usersEditPasswordRequest.getUserOldPassword();
         String newPassword = usersEditPasswordRequest.getUserNewPassword();
@@ -120,11 +124,14 @@ public class UsersService {
     public UsersSimpleResponse editProfile(
             CustomUserDetails userDetails,
             UsersEditProfileRequest usersEditProfileRequest) {
-        Users users = userDetails.getUser();
+
+        Long id = userDetails.getUser().getId();
+        Users user = usersRepository.findById(id).
+                orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         String newNickname = usersEditProfileRequest.getUserNickname();
 
-        if (newNickname.equals(users.getNickname())) {
+        if (newNickname.equals(user.getNickname())) {
             throw new UsersException.SameNicknameException("이전 닉네임과 동일합니다.");
         };
 
@@ -132,23 +139,24 @@ public class UsersService {
             throw new UsersException.UsersNicknameAlreadyExistsException("존재하는 닉네임입니다.");
         }
 
-        users.updateProfile(newNickname);
+        user.updateProfile(newNickname);
 
         return new UsersSimpleResponse(
-                users.getId(),
-                users.getNickname()
+                user.getId(),
+                user.getNickname()
         );
     }
 
     @Transactional
-    public UsersSimpleResponse softDelete(Long id) {
-        Users users = usersRepository.findByIdAndIsDeletedFalse(id)
-                .orElseThrow(() -> new UsersException.UsersNotFoundException("존재하지 않는 사용자입니다."));
-        users.softDelete();
+    public UsersSimpleResponse softDelete(CustomUserDetails userDetails) {
+        Long id = userDetails.getUser().getId();
+        Users user = usersRepository.findById(id).
+                orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        user.softDelete();
 
         return new UsersSimpleResponse(
-                users.getId(),
-                users.getNickname()
+                user.getId(),
+                user.getNickname()
         );
     }
 

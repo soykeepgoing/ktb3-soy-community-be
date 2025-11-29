@@ -8,6 +8,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import com.soy.springcommunity.service.UsersService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,13 +79,15 @@ public class UsersController {
     }
 
     @Operation(summary = "회원 삭제")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "삭제 성공")
     })
-    public ResponseEntity<ApiCommonResponse<UsersSimpleResponse>> softDelete(@PathVariable Long id) {
-        System.out.println(id);
-        UsersSimpleResponse UsersSimpleResponse = usersService.softDelete(id);
+    public ResponseEntity<ApiCommonResponse<UsersSimpleResponse>> softDelete(
+            @AuthenticationPrincipal CustomUserDetails userDetails,
+    ) {
+        UsersSimpleResponse UsersSimpleResponse = usersService.softDelete(userDetails);
+
         return UsersApiResponse.ok(HttpStatus.OK,
                 "회원 삭제 성공",
                 UsersSimpleResponse);
