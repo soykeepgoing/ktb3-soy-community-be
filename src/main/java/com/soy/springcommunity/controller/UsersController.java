@@ -85,8 +85,23 @@ public class UsersController {
     })
     public ResponseEntity<ApiCommonResponse<UsersSimpleResponse>> softDelete(
             @AuthenticationPrincipal CustomUserDetails userDetails,
+            HttpServletRequest request,
+            HttpServletResponse response
     ) {
         UsersSimpleResponse UsersSimpleResponse = usersService.softDelete(userDetails);
+
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+
+        SecurityContextHolder.clearContext();
+
+        Cookie cookie = new Cookie("JSESSIONID", null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        cookie.setHttpOnly(true);
+        response.addCookie(cookie);
 
         return UsersApiResponse.ok(HttpStatus.OK,
                 "회원 삭제 성공",
