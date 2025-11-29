@@ -38,9 +38,11 @@ public class FilesController {
         return ResponseEntity.ok(Map.of("profileImgUrl", url));
     }
 
-    @PostMapping("/api/posts/image")
+    @PostMapping("/api/posts/{postId}/image")
     public ResponseEntity<Map<String, String>> uploadPostImg(
-            @PathVariable Long postId, @RequestPart("file") MultipartFile file) throws IOException {
+            @PathVariable Long postId,
+            @RequestPart("file") MultipartFile file
+    ) throws IOException {
         String url = filesService.saveFile(file);
         postsService.updatePostImage(postId, url);
         return ResponseEntity.ok(Map.of("profileImgUrl", url));

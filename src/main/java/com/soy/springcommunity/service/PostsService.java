@@ -80,7 +80,7 @@ public class PostsService {
     }
 
     @Transactional
-    public PostsCreateResponse createPost(Long userId, PostsCreateRequest postsCreateRequest) {
+    public PostsCreateResponse createPost(Long userId, PostsCreateRequest postsCreateRequest, String postImgUrl) {
         Users user = usersRepository.findByIdAndIsDeletedFalse(userId)
                 .orElseThrow(()-> new UsersException.UsersNotFoundException("존재하지않는 유저입니다."));
 
@@ -99,7 +99,7 @@ public class PostsService {
 
         PostStats postStats = PostStats.createStats(post);
 
-        FilesPostImgUrl filesPostImgUrl = FilesPostImgUrl.of(post, URL_DEFAULT_POST_IMG);
+        FilesPostImgUrl filesPostImgUrl = FilesPostImgUrl.of(post, postImgUrl);
 
         postsRepository.save(post);
         postsStatsReposiotry.save(postStats);
