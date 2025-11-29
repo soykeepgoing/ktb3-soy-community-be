@@ -3,6 +3,7 @@ package com.soy.springcommunity.entity;
 import com.soy.springcommunity.utils.PasswordUtil;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.time.LocalDateTime;
