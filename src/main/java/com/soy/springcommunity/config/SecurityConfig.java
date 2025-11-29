@@ -1,5 +1,6 @@
 package com.soy.springcommunity.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.soy.springcommunity.entity.Role;
 import com.soy.springcommunity.filter.CustomJsonAuthFilter;
 import com.soy.springcommunity.handler.CustomAuthSuccessHandler;
@@ -55,9 +56,19 @@ public class SecurityConfig{
                         .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers("/api/auth/login", "/api/users").permitAll()
+                        .requestMatchers("/api/auth/login", "/api/users", "/api/auth/logout").permitAll()
                         .requestMatchers("/api/admin/**").hasAuthority(Role.ADMIN.name())
                         .anyRequest().authenticated()
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/api/auth/logout")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                        .logoutSuccessHandler((request, response, authentication) -> {
+                            response.setStatus(HttpServletResponse.SC_OK);
+                            response.setContentType("application/json");
+                            response.getWriter().write("{\"message\":\"logout success\"}");
+                        })
                 )
                 .addFilterAt(jsonFilter, UsernamePasswordAuthenticationFilter.class);
 
